@@ -4,183 +4,403 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Church Event Scheduler | Mukono Community Church</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --primary: #4a6cf7;
+            --primary-dark: #3a5ce0;
+            --secondary: #764ba2;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
-            line-height: 1.6;
+            background: #f8f9fa;
+            overflow-x: hidden;
         }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        header {
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
-            text-align: center;
-            margin-bottom: 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-        h1 {
-            font-size: 2.5rem;
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-        .badge {
-            display: inline-block;
-            background: #4a6cf7;
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
-            padding: 5px 15px;
-            border-radius: 30px;
-            font-size: 0.8rem;
-            margin: 10px 0;
+            position: relative;
+            padding: 80px 0 120px;
+            overflow: hidden;
         }
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 40px 0;
+        .hero-wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            line-height: 0;
         }
-        .card {
+        .text-gradient {
+            background: linear-gradient(135deg, #fff, #ffd966);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .stat-card, .feature-card, .event-card {
             background: white;
             border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
         }
-        .card:hover {
-            transform: translateY(-5px);
+        .stat-card:hover, .feature-card:hover, .event-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
-        .card h3 {
-            color: #4a6cf7;
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+        .stat-label {
+            color: #6c757d;
+            font-weight: 500;
+        }
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--dark);
             margin-bottom: 15px;
         }
-        .screenshot {
-            background: #f0f0f0;
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
-            margin: 40px 0;
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #6c757d;
         }
-        .screenshot img {
-            max-width: 100%;
+        .event-card {
+            position: relative;
+            overflow: hidden;
+            max-width: 380px;
+            margin: 0 auto;
+        }
+        .event-date-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: white;
             border-radius: 10px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            padding: 5px 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 2;
         }
-        .btn {
+        .event-date-badge .day {
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: block;
+            line-height: 1;
+            color: var(--primary);
+        }
+        .event-date-badge .month {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: #6c757d;
+        }
+        .event-card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .event-card-body {
+            padding: 20px;
+        }
+        .event-card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .event-meta {
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin-bottom: 10px;
+        }
+        .event-meta span {
             display: inline-block;
-            background: #4a6cf7;
+            margin-right: 15px;
+        }
+        .event-card-text {
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 15px;
+        }
+        .cta-card {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 30px;
             color: white;
+        }
+        .btn-primary {
+            background-color: var(--primary);
+            border: none;
             padding: 12px 30px;
             border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background 0.3s;
-            margin: 10px;
+            transition: all 0.3s;
         }
-        .btn:hover {
-            background: #3a5ce0;
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
         }
-        .btn-outline {
+        .btn-outline-light {
+            border: 2px solid white;
             background: transparent;
-            border: 2px solid #4a6cf7;
-            color: #4a6cf7;
+            transition: all 0.3s;
         }
-        .btn-outline:hover {
-            background: #4a6cf7;
-            color: white;
+        .btn-outline-light:hover {
+            background: white;
+            color: var(--primary);
         }
         footer {
-            text-align: center;
-            padding: 20px;
+            background-color: var(--dark);
             color: white;
-            margin-top: 40px;
+            padding: 40px 0 20px;
         }
         @media (max-width: 768px) {
-            h1 { font-size: 1.8rem; }
-            .container { padding: 15px; }
+            .hero-section { padding: 60px 0 80px; }
+            .section-title { font-size: 1.8rem; }
+            .hero-img { margin-top: 30px; border-radius: 20px; }
+        }
+        .hero-img {
+            max-width: 100%;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
     </style>
 </head>
 <body>
+
+<!-- Hero Section (identical to index.php) -->
+<section class="hero-section">
     <div class="container">
-        <header>
-            <span class="badge">Open Source Project</span>
-            <h1>📅 Smart Church Event Scheduler</h1>
-            <p>A complete web‑based system for churches to manage events, registrations, payments, and member communication.</p>
-            <p>Built with PHP, MySQL, Bootstrap, and PayPal/MakyPay integration.</p>
-            <div>
-                <a href="index.php" class="btn">▶ Live Demo (PHP Server Required)</a>
-                <a href="https://github.com/yourusername/church-scheduler" class="btn btn-outline">📦 GitHub Repository</a>
-            </div>
-        </header>
-
-        <section>
-            <h2 style="text-align: center; color: white; margin-bottom: 20px;">✨ Key Features</h2>
-            <div class="features">
-                <div class="card">
-                    <h3>📆 Event Management</h3>
-                    <p>Create, edit, approve, and schedule events. Set capacity, date, time, location, and even upload videos or images.</p>
-                </div>
-                <div class="card">
-                    <h3>👥 Member & Guest Registration</h3>
-                    <p>Members register for events; guests can also sign up with name/email/phone. Admin can approve member accounts.</p>
-                </div>
-                <div class="card">
-                    <h3>💳 Online Payments</h3>
-                    <p>Accept donations and event fees via PayPal or MakyPay (Mobile Money, Cards). Fully integrated sandbox/live.</p>
-                </div>
-                <div class="card">
-                    <h3>📊 Reports & Analytics</h3>
-                    <p>Admin dashboard with charts, event reports (CSV/PDF), and real‑time statistics.</p>
-                </div>
-                <div class="card">
-                    <h3>🤖 AI Chatbot</h3>
-                    <p>Built‑in chatbot on the landing page to answer FAQs about events, registration, and payments.</p>
-                </div>
-                <div class="card">
-                    <h3>🔔 Notifications</h3>
-                    <p>In‑app notifications for event approvals, registration confirmations, and payment updates.</p>
+        <div class="row align-items-center justify-content-center text-center text-lg-start">
+            <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right">
+                <h1 class="display-4 fw-bold mb-3">Welcome to <span class="text-gradient">Mukono Community Church</span></h1>
+                <p class="lead mb-4">Smart Church Event Scheduler – Efficiently coordinate, manage, and participate in church events.</p>
+                <div class="d-flex gap-3 flex-wrap justify-content-center justify-content-lg-start">
+                    <a href="#setup" class="btn btn-primary btn-lg px-4 py-3">View on GitHub <i class="fas fa-arrow-right ms-2"></i></a>
+                    <a href="#features" class="btn btn-outline-light btn-lg px-4 py-3">Explore Features</a>
                 </div>
             </div>
-        </section>
-
-        <div class="screenshot">
-            <h3 style="margin-bottom: 20px;">📸 Screenshots (Placeholder)</h3>
-            <p>Replace with actual screenshots of your system.</p>
-            <!-- You can add actual images like:
-            <img src="screenshots/dashboard.png" alt="Admin Dashboard">
-            <img src="screenshots/events.png" alt="Events Page">
-            -->
+            <div class="col-lg-6" data-aos="fade-left">
+                <div class="hero-image text-center">
+                    <img src="assets/images/chuch illustration.jpg" alt="Church Illustration" class="img-fluid hero-img" onerror="this.src='https://via.placeholder.com/400x300?text=Church+Image'">
+                </div>
+            </div>
         </div>
+    </div>
+    <div class="hero-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#ffffff" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+    </div>
+</section>
 
-        <section style="background: white; border-radius: 20px; padding: 30px; margin: 40px 0;">
-            <h2 style="color: #2c3e50;">🚀 Local Setup Instructions</h2>
-            <ol style="margin-left: 20px; line-height: 1.8;">
+<!-- Stats Section (static numbers, but you can replace with actual project stats) -->
+<section class="stats-section py-5">
+    <div class="container">
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-3 col-sm-6">
+                <div class="stat-card text-center p-4">
+                    <div class="stat-icon mb-3"><i class="fas fa-calendar-alt fa-3x text-primary"></i></div>
+                    <h3 class="stat-number">100+</h3>
+                    <p class="stat-label mb-0">Events Scheduled</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="stat-card text-center p-4">
+                    <div class="stat-icon mb-3"><i class="fas fa-check-circle fa-3x text-success"></i></div>
+                    <h3 class="stat-number">85%</h3>
+                    <p class="stat-label mb-0">Approved Rate</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="stat-card text-center p-4">
+                    <div class="stat-icon mb-3"><i class="fas fa-users fa-3x text-info"></i></div>
+                    <h3 class="stat-number">500+</h3>
+                    <p class="stat-label mb-0">Church Members</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="stat-card text-center p-4">
+                    <div class="stat-icon mb-3"><i class="fas fa-money-bill-wave fa-3x text-warning"></i></div>
+                    <h3 class="stat-number">UGX 5M+</h3>
+                    <p class="stat-label mb-0">Donations Processed</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section (identical to index.php) -->
+<section class="features-section py-5 bg-light" id="features">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="section-title">Why Choose Our Platform?</h2>
+            <p class="section-subtitle">Smart tools to enhance your church experience</p>
+        </div>
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-4">
+                <div class="feature-card text-center p-4">
+                    <div class="feature-icon mb-3"><i class="fas fa-calendar-check fa-3x text-primary"></i></div>
+                    <h4>Easy Event Scheduling</h4>
+                    <p>Create, manage, and promote church events with just a few clicks. No technical skills required.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card text-center p-4">
+                    <div class="feature-icon mb-3"><i class="fas fa-bell fa-3x text-primary"></i></div>
+                    <h4>Smart Notifications</h4>
+                    <p>Get instant reminders and updates about upcoming events. Never miss an important gathering.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card text-center p-4">
+                    <div class="feature-icon mb-3"><i class="fas fa-chart-line fa-3x text-primary"></i></div>
+                    <h4>Attendance Tracking</h4>
+                    <p>Monitor event participation and manage registrations efficiently. Generate detailed reports.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Upcoming Events Section (static preview) -->
+<section class="events-section py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="section-title">Upcoming Events</h2>
+            <p class="section-subtitle">Join us in fellowship and worship</p>
+        </div>
+        <div class="row justify-content-center">
+            <!-- Sample event card – you can replace with actual event data later -->
+            <div class="col-lg-4 col-md-6 mb-4 d-flex justify-content-center">
+                <div class="event-card h-100 w-100">
+                    <div class="event-date-badge"><span class="day">15</span><span class="month">Apr</span></div>
+                    <img src="assets/images/default-event.jpg" class="event-card-img" alt="Event Image">
+                    <div class="event-card-body">
+                        <h5 class="event-card-title">Sunday Worship Service</h5>
+                        <div class="event-meta">
+                            <span><i class="fas fa-clock"></i> 10:00 AM - 12:00 PM</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Main Sanctuary</span>
+                        </div>
+                        <p class="event-card-text">Join us for a powerful worship experience. All are welcome.</p>
+                        <a href="#" class="btn btn-outline-primary btn-sm">View Details <i class="fas fa-arrow-right ms-1"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4 d-flex justify-content-center">
+                <div class="event-card h-100 w-100">
+                    <div class="event-date-badge"><span class="day">22</span><span class="month">Apr</span></div>
+                    <img src="assets/images/default-event.jpg" class="event-card-img" alt="Event Image">
+                    <div class="event-card-body">
+                        <h5 class="event-card-title">Youth Bible Study</h5>
+                        <div class="event-meta">
+                            <span><i class="fas fa-clock"></i> 5:00 PM - 7:00 PM</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Youth Hall</span>
+                        </div>
+                        <p class="event-card-text">Interactive Bible study and fellowship for young people.</p>
+                        <a href="#" class="btn btn-outline-primary btn-sm">View Details <i class="fas fa-arrow-right ms-1"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4 d-flex justify-content-center">
+                <div class="event-card h-100 w-100">
+                    <div class="event-date-badge"><span class="day">30</span><span class="month">Apr</span></div>
+                    <img src="assets/images/default-event.jpg" class="event-card-img" alt="Event Image">
+                    <div class="event-card-body">
+                        <h5 class="event-card-title">Community Outreach</h5>
+                        <div class="event-meta">
+                            <span><i class="fas fa-clock"></i> 8:00 AM - 2:00 PM</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Church Grounds</span>
+                        </div>
+                        <p class="event-card-text">Serving our community with food, clothes, and prayer.</p>
+                        <a href="#" class="btn btn-outline-primary btn-sm">View Details <i class="fas fa-arrow-right ms-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <a href="#" class="btn btn-outline-primary btn-lg">View All Events <i class="fas fa-arrow-right ms-2"></i></a>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action Section (identical) -->
+<section class="cta-section py-5">
+    <div class="container">
+        <div class="cta-card text-center p-5">
+            <h2 class="mb-3">Become Part of Our Church Family</h2>
+            <p class="lead mb-4">Join our community to create events, register for activities, and stay connected.</p>
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+                <a href="https://github.com/yourusername/church-scheduler" class="btn btn-primary btn-lg px-5">View on GitHub</a>
+                <a href="#setup" class="btn btn-outline-light btn-lg px-5">Setup Instructions</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Donation Section (static) -->
+<section class="donation-section py-5 bg-light">
+    <div class="container text-center">
+        <h2 class="mb-3">Support Our Ministry</h2>
+        <p class="lead mb-4">Your generous donations help us serve the community better.</p>
+        <a href="#" class="btn btn-success btn-lg">
+            <i class="fas fa-hand-holding-heart me-2"></i> Make a Donation
+        </a>
+        <p class="mt-3 text-muted">* In the live PHP version, donations are processed via MakyPay/PayPal.</p>
+    </div>
+</section>
+
+<!-- Setup Instructions Section (for GitHub) -->
+<section class="py-5" id="setup">
+    <div class="container">
+        <div class="card shadow-sm border-0 rounded-4 p-4">
+            <h2 class="text-center mb-4">🚀 Quick Setup</h2>
+            <ol class="mb-0">
                 <li>Clone the repository: <code>git clone https://github.com/yourusername/church-scheduler.git</code></li>
                 <li>Place the folder in your web server root (e.g., <code>htdocs</code> or <code>www</code>).</li>
-                <li>Create a MySQL database named <code>church_scheduler</code> and import the SQL schema from <code>config/database.sql</code>.</li>
+                <li>Create a MySQL database named <code>church_scheduler</code> and import <code>config/database.sql</code>.</li>
                 <li>Update database credentials in <code>config/database.php</code>.</li>
-                <li>Set your PayPal/MakyPay API keys in <code>config/database.php</code>.</li>
-                <li>Ensure <code>uploads/</code> folder is writable.</li>
+                <li>Set your MakyPay/PayPal API keys in <code>config/database.php</code>.</li>
+                <li>Ensure the <code>uploads/</code> folder is writable.</li>
                 <li>Access the site at <code>http://localhost/church-scheduler/</code>.</li>
                 <li>Default admin login: <code>admin / Admin@123</code>.</li>
             </ol>
-        </section>
-
-        <footer>
-            <p>© 2025 Smart Church Event Scheduler | Developed for Mukono Community Church</p>
-            <p>Released under the MIT License.</p>
-        </footer>
+        </div>
     </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h5><i class="fas fa-church me-2"></i>Smart Church Scheduler</h5>
+                <p>Efficiently coordinate and manage church events.</p>
+            </div>
+            <div class="col-md-3">
+                <h5>Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-white-50">Home</a></li>
+                    <li><a href="#features" class="text-white-50">Features</a></li>
+                    <li><a href="#setup" class="text-white-50">Setup</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h5>Contact</h5>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-envelope"></i> info@churchscheduler.com</li>
+                    <li><i class="fas fa-phone"></i> +256 XXX XXX XXX</li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <div class="text-center">
+            <p class="mb-0">&copy; 2025 Smart Church Event Scheduler. All rights reserved.</p>
+            <p class="small">Open source project – feel free to contribute.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap JS (optional) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
