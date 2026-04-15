@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Church Event Scheduler | Mukono Community Church</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        .badge {
+            display: inline-block;
+            background: #4a6cf7;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            margin: 10px 0;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card h3 {
+            color: #4a6cf7;
+            margin-bottom: 15px;
+        }
+        .screenshot {
+            background: #f0f0f0;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            margin: 40px 0;
+        }
+        .screenshot img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .btn {
+            display: inline-block;
+            background: #4a6cf7;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+            margin: 10px;
+        }
+        .btn:hover {
+            background: #3a5ce0;
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #4a6cf7;
+            color: #4a6cf7;
+        }
+        .btn-outline:hover {
+            background: #4a6cf7;
+            color: white;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: white;
+            margin-top: 40px;
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+            .container { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <span class="badge">Open Source Project</span>
+            <h1>📅 Smart Church Event Scheduler</h1>
+            <p>A complete web‑based system for churches to manage events, registrations, payments, and member communication.</p>
+            <p>Built with PHP, MySQL, Bootstrap, and PayPal/MakyPay integration.</p>
+            <div>
+                <a href="index.php" class="btn">▶ Live Demo (PHP Server Required)</a>
+                <a href="https://github.com/yourusername/church-scheduler" class="btn btn-outline">📦 GitHub Repository</a>
+            </div>
+        </header>
+
+        <section>
+            <h2 style="text-align: center; color: white; margin-bottom: 20px;">✨ Key Features</h2>
+            <div class="features">
+                <div class="card">
+                    <h3>📆 Event Management</h3>
+                    <p>Create, edit, approve, and schedule events. Set capacity, date, time, location, and even upload videos or images.</p>
+                </div>
+                <div class="card">
+                    <h3>👥 Member & Guest Registration</h3>
+                    <p>Members register for events; guests can also sign up with name/email/phone. Admin can approve member accounts.</p>
+                </div>
+                <div class="card">
+                    <h3>💳 Online Payments</h3>
+                    <p>Accept donations and event fees via PayPal or MakyPay (Mobile Money, Cards). Fully integrated sandbox/live.</p>
+                </div>
+                <div class="card">
+                    <h3>📊 Reports & Analytics</h3>
+                    <p>Admin dashboard with charts, event reports (CSV/PDF), and real‑time statistics.</p>
+                </div>
+                <div class="card">
+                    <h3>🤖 AI Chatbot</h3>
+                    <p>Built‑in chatbot on the landing page to answer FAQs about events, registration, and payments.</p>
+                </div>
+                <div class="card">
+                    <h3>🔔 Notifications</h3>
+                    <p>In‑app notifications for event approvals, registration confirmations, and payment updates.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="screenshot">
+            <h3 style="margin-bottom: 20px;">📸 Screenshots (Placeholder)</h3>
+            <p>Replace with actual screenshots of your system.</p>
+            <!-- You can add actual images like:
+            <img src="screenshots/dashboard.png" alt="Admin Dashboard">
+            <img src="screenshots/events.png" alt="Events Page">
+            -->
+        </div>
+
+        <section style="background: white; border-radius: 20px; padding: 30px; margin: 40px 0;">
+            <h2 style="color: #2c3e50;">🚀 Local Setup Instructions</h2>
+            <ol style="margin-left: 20px; line-height: 1.8;">
+                <li>Clone the repository: <code>git clone https://github.com/yourusername/church-scheduler.git</code></li>
+                <li>Place the folder in your web server root (e.g., <code>htdocs</code> or <code>www</code>).</li>
+                <li>Create a MySQL database named <code>church_scheduler</code> and import the SQL schema from <code>config/database.sql</code>.</li>
+                <li>Update database credentials in <code>config/database.php</code>.</li>
+                <li>Set your PayPal/MakyPay API keys in <code>config/database.php</code>.</li>
+                <li>Ensure <code>uploads/</code> folder is writable.</li>
+                <li>Access the site at <code>http://localhost/church-scheduler/</code>.</li>
+                <li>Default admin login: <code>admin / Admin@123</code>.</li>
+            </ol>
+        </section>
+
+        <footer>
+            <p>© 2025 Smart Church Event Scheduler | Developed for Mukono Community Church</p>
+            <p>Released under the MIT License.</p>
+        </footer>
+    </div>
+</body>
+</html>
